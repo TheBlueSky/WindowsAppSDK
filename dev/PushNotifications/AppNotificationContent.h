@@ -13,8 +13,9 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
         hstring GetXml();
 
     private:
-        std::wstring m_text1{};
-        std::wstring m_text2{};
+        int m_lines{ 0 };
+        Text m_text1{ L"default1" };
+        Text m_text2{ L"default2" };
     };
 }
 namespace winrt::Microsoft::Windows::PushNotifications::factory_implementation

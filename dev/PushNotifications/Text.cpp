@@ -14,15 +14,6 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
 
     hstring Text::GetXml()
     {
-        std::wstring xmlPayload{ L"<toast>" };
-
-        if (!m_text.empty())
-        {
-            xmlPayload.append(m_text);
-        }
-
-        xmlPayload.append(L"</toast>");
-
-        return hstring(xmlPayload);
+        return hstring(m_text);
     }
 }
