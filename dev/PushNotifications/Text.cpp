@@ -2,8 +2,6 @@
 #include "Text.h"
 #include "Microsoft.Windows.PushNotifications.Text.g.cpp"
 
-using namespace winrt::Windows::Data::Xml::Dom;
-
 namespace winrt::Microsoft::Windows::PushNotifications::implementation
 {
 

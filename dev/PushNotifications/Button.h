@@ -7,11 +7,15 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
     {
         Button(hstring content);
 
+        winrt::Microsoft::Windows::PushNotifications::Button AddArgument(hstring key, hstring value);
+
         // Retrieves the XML content of the Text.
         hstring GetXml();
 
     private:
         std::wstring m_content{};
+        std::wstring m_key{};
+        std::wstring m_value{};
     };
 }
 
@@ -21,4 +25,3 @@ namespace winrt::Microsoft::Windows::PushNotifications::factory_implementation
     {
     };
 }
-

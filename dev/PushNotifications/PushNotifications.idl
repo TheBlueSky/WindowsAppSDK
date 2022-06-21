@@ -115,7 +115,7 @@ namespace Microsoft.Windows.PushNotifications
 
         // Retrieves the XML content of the Text.
         String GetXml();
-    }
+    };
 
     enum ButtonStyle
     {
@@ -142,7 +142,7 @@ namespace Microsoft.Windows.PushNotifications
 
         // Adds a key/value to the activation arguments that will be returned when the App Notification or its buttons are clicked.
         //[default_overload]
-        //Button AddArgument(String key, String value);
+        Button AddArgument(String key, String value);
         //Button AddArgument(String key, Int32 value);
         //Button AddArgument(String key, Double value);
         //Button AddArgument(String key, Single value);
@@ -150,7 +150,7 @@ namespace Microsoft.Windows.PushNotifications
 
         // Retrieves the XML content of the button.
         String GetXml();
-    }
+    };
 
     enum ImagePlacement
     {
@@ -159,22 +159,22 @@ namespace Microsoft.Windows.PushNotifications
         Hero, // Prominently displays image within the AppNotification banner and while inside Notification Center.
     };
 
-    //runtimeclass Image
-    //{
-        //Image(String imageSrc);
+    runtimeclass Image
+    {
+        Image(String imageSrc);
 
         // A description of the image, for users of assistive technologies.
         //Image SetAlternateText(String alternateText);
 
         // An enum to describe how the image will be cropped.
-        //Image SetUsesCircleCrop(Boolean usesCircleCrop);
+        Image SetUsesCircleCrop(Boolean usesCircleCrop);
 
         // Override the app logo with custom image of choice that will be displayed on the AppNotification, otherwise it will be an inline image.
-        //Image SetImagePlacement(ImagePlacement placement);
+        Image SetImagePlacement(ImagePlacement placement);
 
         // Retrieves the XML content of the image.
-        //String GetXml();
-    //}
+        String GetXml();
+    };
 
     enum ScenarioType
     {
@@ -200,7 +200,7 @@ namespace Microsoft.Windows.PushNotifications
 
         // Adds a key/value to the activation arguments that will be returned when the App Notification or its buttons are clicked.
         [default_overload]
-        //AppNotificationContent AddArgument(String key, String value);
+        AppNotificationContent AddArgument(String key, String value);
         //AppNotificationContent AddArgument(String key, Boolean value);
         //AppNotificationContent AddArgument(String key, Int32 value);
         //AppNotificationContent AddArgument(String key, Double value);
@@ -225,7 +225,7 @@ namespace Microsoft.Windows.PushNotifications
         AppNotificationContent AddButton(Button button);
 
         // Add an image to the AppNotificationContent.
-        //AppNotificationContent AddImage(Image image);
+        AppNotificationContent AddImage(Image image);
 
         // Add an audio to play when the AppNotification is displayed.
         //AppNotificationContent AddAudio(Audio audio);
@@ -242,5 +242,5 @@ namespace Microsoft.Windows.PushNotifications
 
         // Shows a new AppNotification with the current content.
         //void Show();
-    }
+    };
 }

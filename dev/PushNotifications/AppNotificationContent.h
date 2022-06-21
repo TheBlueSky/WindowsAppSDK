@@ -7,7 +7,10 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
     {
         AppNotificationContent() = default;
 
+        winrt::Microsoft::Windows::PushNotifications::AppNotificationContent AddArgument(hstring key, hstring value);
+
         winrt::Microsoft::Windows::PushNotifications::AppNotificationContent AddButton(Button button);
+        winrt::Microsoft::Windows::PushNotifications::AppNotificationContent AddImage(Image image);
         winrt::Microsoft::Windows::PushNotifications::AppNotificationContent AddText(Text text);
 
         hstring GetXml();
@@ -16,7 +19,10 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
         int m_lines{ 0 };
         Text m_text1{ L"default1" };
         Text m_text2{ L"default2" };
-        Button m_button{ L"Default Button"};
+        Button m_button{ L"Default Button" };
+        Image m_image{ L"DefaultImage" };
+        std::wstring m_key{};
+        std::wstring m_value{};
     };
 }
 namespace winrt::Microsoft::Windows::PushNotifications::factory_implementation

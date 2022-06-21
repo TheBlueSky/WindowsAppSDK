@@ -19,6 +19,7 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)AppNotificationContent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Button.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Image.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PushNotificationChannel.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PushNotificationCreateChannelResult.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PushNotificationManager.cpp" />
@@ -29,6 +30,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)AppNotificationContent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Button.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)externs.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Image.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PushBackgroundTaskInstance.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PushNotificationChannel.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PushNotificationCreateChannelResult.h" />

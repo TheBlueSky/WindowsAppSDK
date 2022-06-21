@@ -135,43 +135,35 @@ void BaseTestSuite::MultipleChannelClose()
 
 void BaseTestSuite::VerifyAppNotificationContentBuilder()
 {
-#if 0
-    L"<toast launch = \"action=ToastClick&amp;" + ScenarioIdToken + L"\">\
-            <visual>\
-                <binding template = \"ToastGeneric\">\
-                    <image placement = \"appLogoOverride\" hint-crop=\"circle\" src = \"" + winrt::App::GetFullPathToAsset(L"Square150x150Logo.png") + L"\"/>\
-                    <text>" + ScenarioName + L"</text>\
-                    <text>This is an example message using XML</text>\
-                </binding>\
-            </visual>\
-            <actions>\
-                <action\
-                    content = \"Open App\"\
-                    arguments = \"action=OpenApp&amp;" + ScenarioIdToken + L"\"/>\
-            </actions>\
-        </toast>"
-#endif
-
     winrt::hstring expected{
-        L"<toast>"\
+        L"<toast launch = \"action=ToastClick\">"\
             L"<visual>"\
                 L"<binding template = \"ToastGeneric\">"\
+                    L"<image "\
+                        L"placement = \"appLogoOverride\" "\
+                        L"hint - crop = \"circle\" "\
+                        L"src = \"Path\\to\\Square150x150Logo.png\"/>"\
                     L"<text>Message1</text>"\
                     L"<text>Message2</text>"\
                 L"</binding>"\
             L"</visual>"\
             L"<actions>"\
                 L"<action "\
-                    L"content = \"Open App\"/>"\
-                    //arguments = \"action=OpenApp&amp;" + ScenarioIdToken + L"\"/>
+                    L"content = \"Open App\" "\
+                    L"arguments = \"action=OpenApp\"/>"\
             L"</actions>"\
         L"</toast>"
     };
 
     auto xmlPayload{ AppNotificationContent()
+        .AddArgument(L"action", L"ToastClick")
+        .AddImage(Image(L"Path\\to\\Square150x150Logo.png")
+            .SetUsesCircleCrop(true)
+            .SetImagePlacement(ImagePlacement::AppLogoOverride))
         .AddText(Text(L"Message1"))
         .AddText(Text(L"Message2"))
-        .AddButton(Button(L"Open App"))
+        .AddButton(Button(L"Open App")
+            .AddArgument(L"action", L"OpenApp"))
         .GetXml()
     };
 
