@@ -17,14 +17,17 @@
     <Midl Include="$(MSBuildThisFileDirectory)PushNotifications.idl" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)AppNotificationContentBuilder.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)AppNotificationContent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Button.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PushNotificationChannel.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PushNotificationCreateChannelResult.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PushNotificationManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PushNotificationReceivedEventArgs.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Text.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)AppNotificationContentBuilder.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AppNotificationContent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Button.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)externs.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PushBackgroundTaskInstance.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PushNotificationChannel.h" />
@@ -35,5 +38,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)PushNotificationDummyDeferral.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PushNotificationTelemetry.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PushNotificationUtility.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Text.h" />
   </ItemGroup>
 </Project>

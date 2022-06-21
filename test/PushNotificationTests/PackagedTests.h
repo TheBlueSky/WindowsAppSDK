@@ -50,8 +50,6 @@ class PackagedTests : BaseTestSuite
         TEST_METHOD_PROPERTY(L"Ignore", L"true")
     END_TEST_METHOD()
     TEST_METHOD(VerifyAppNotificationContentBuilder);
-    TEST_METHOD(VerifyAppNotificationFluentContentBuilder);
-    TEST_METHOD(VerifyAppNotificationFluentWrapperContentBuilder);
     TEST_METHOD(VerifyRegisterAndUnregister);
     TEST_METHOD(VerifyRegisterAndUnregisterAll);
     TEST_METHOD(VerifyUnregisterFails);

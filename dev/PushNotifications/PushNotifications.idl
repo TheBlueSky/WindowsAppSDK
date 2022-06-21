@@ -99,14 +99,148 @@ namespace Microsoft.Windows.PushNotifications
         event Windows.Foundation.TypedEventHandler<PushNotificationManager, PushNotificationReceivedEventArgs> PushReceived;
     };
 
-    [contract(PushNotificationsContract, 1)]
-    runtimeclass AppNotificationContentBuilder
+    runtimeclass Text
     {
-        AppNotificationContentBuilder();
+        Text(String content);
 
+        // The target locale of the XML payload, specified as a BCP-47 language tags.
+        //Text SetLanguage(String language);
+
+        // Center the text for incoming call notifications. This value is only used for notifications with with a scenario value of IncomingCall.
+        //Text SetIsCallScenario(Boolean isCallScenario);
+
+        // Displays text at the bottom of your notification, along with your app's identity or the notification's timestamp.
+        // On older versions of Windows that don't support attribution text, the text will simply be displayed as another text element.
+        //Text SetIsAttributionText(Boolean isAttributionText);
+
+        // Retrieves the XML content of the Text.
+        String GetXml();
+    }
+
+    enum ButtonStyle
+    {
+        Success, // The button will be green
+        Critical, // The button will be red
+    };
+
+    runtimeclass Button
+    {
+        Button(String content);
+
+        // Gets/sets the Icon source for the button.
+        //Button SetIconUri(String iconUri);
+
+        // The tooltip for a button, if the button has an empty content string.
+        //Button SetToolTip(String toolTip);
+
+        // Sets if the Button will be a context menu action.
+        //Button SetIsContextMenuPlacement(Boolean isContextMenuPlacement);
+        //Button SetButtonStyle(ButtonStyle buttonStyle);
+
+        // Gets or sets the ID of an existing AppNotificationTextBox in order to have this button display to the right of the input.
+        //Button SetInputId(String inputId);
+
+        // Adds a key/value to the activation arguments that will be returned when the App Notification or its buttons are clicked.
+        //[default_overload]
+        //Button AddArgument(String key, String value);
+        //Button AddArgument(String key, Int32 value);
+        //Button AddArgument(String key, Double value);
+        //Button AddArgument(String key, Single value);
+        //Button AddArgument(String key, Boolean value);
+
+        // Retrieves the XML content of the button.
+        String GetXml();
+    }
+
+    enum ImagePlacement
+    {
+        Inline, // A full-width inline-image that appears when you expand the AppNotification.
+        AppLogoOverride, // Overrides the AppNotification app logo with a custom image.
+        Hero, // Prominently displays image within the AppNotification banner and while inside Notification Center.
+    };
+
+    //runtimeclass Image
+    //{
+        //Image(String imageSrc);
+
+        // A description of the image, for users of assistive technologies.
+        //Image SetAlternateText(String alternateText);
+
+        // An enum to describe how the image will be cropped.
+        //Image SetUsesCircleCrop(Boolean usesCircleCrop);
+
+        // Override the app logo with custom image of choice that will be displayed on the AppNotification, otherwise it will be an inline image.
+        //Image SetImagePlacement(ImagePlacement placement);
+
+        // Retrieves the XML content of the image.
+        //String GetXml();
+    //}
+
+    enum ScenarioType
+    {
+        Default, // The normal AppNotification behavior. The AppNotification appears for a short duration, and then automatically dismisses into Notification Center.
+        Reminder, // The notification will stay on screen until the user dismisses it or takes action.
+        Alarm,    // Alarms behave like Reminder, but alarms will additionally loop audio with a default alarm sound.
+        IncomingCall, // Incoming call notifications are displayed pre-expanded in a special call format and stay on the user's screen till dismissed.
+        Urgent, // Important notifications allow users to have more control over what 1st party and 3rd party apps can send them high-priority AppNotifications (urgent/important) that can break through Focus Assist.
+    };
+
+    enum Duration
+    {
+        Short, // Default value. AppNotification appears for a short while and then goes into Notification Center.
+        Long, // AppNotification stays on-screen for longer, and then goes into Notification Center.
+    };
+
+    runtimeclass AppNotificationContent
+    {
+        AppNotificationContent();
+
+        // Adds a key(without value) to the activation arguments that will be returned when the App Notification or its buttons are clicked.
+        //AppNotificationContent AddArgument(String key);
+
+        // Adds a key/value to the activation arguments that will be returned when the App Notification or its buttons are clicked.
+        [default_overload]
+        //AppNotificationContent AddArgument(String key, String value);
+        //AppNotificationContent AddArgument(String key, Boolean value);
+        //AppNotificationContent AddArgument(String key, Int32 value);
+        //AppNotificationContent AddArgument(String key, Double value);
+        //AppNotificationContent AddArgument(String key, Single value);
+
+        // Defines the amount of time the App Notification should display.
+        //AppNotificationContent SetDuration(Duration duration);
+
+        // Allows Buttons using SetButtonStyle to display "success" | "critical" styles
+        //AppNotificationContent SetUseButtonStyle(Boolean usesButtonStyle);
+
+        // Sets the timeStamp of the AppNotification to when it was constructed instead of when it was sent.
+        //AppNotificationContent SetTimeStamp(String timeStamp);
+
+        // Sets the scenario of the AppNotification.
+        //AppNotificationContent SetScenario(ScenarioType scenarioType);
+
+        // Adds text to the AppNotification with a Text component.
+        AppNotificationContent AddText(Text text);
+
+        // Adds a button to the AppNotificationContent
+        AppNotificationContent AddButton(Button button);
+
+        // Add an image to the AppNotificationContent.
+        //AppNotificationContent AddImage(Image image);
+
+        // Add an audio to play when the AppNotification is displayed.
+        //AppNotificationContent AddAudio(Audio audio);
+
+        // Add an input TextBox to retrieve user input.
+        //AppNotificationContent AddTextBox(TextBox textBox);
+
+        // Add an input SelectionMenu to retrieve user input.
+        //AppNotificationContent AddSelectionMenu(SelectionMenu selectionMenu);
+
+        // Retrieves the notification XML content so that it can be used with a local
+        // AppNotification constructor.
         String GetXml();
 
-        void AddText(String text);
-        AppNotificationContentBuilder AddTextFluent(String text);
-    };
+        // Shows a new AppNotification with the current content.
+        //void Show();
+    }
 }

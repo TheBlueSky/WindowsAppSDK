@@ -19,19 +19,6 @@ using namespace winrt::Windows::Storage;
 using namespace winrt::Windows::System;
 using namespace winrt::Microsoft::Windows::PushNotifications;
 
-class AppNotificationFluentContentBuilder
-{
-public:
-    AppNotificationFluentContentBuilder() {}
-
-    AppNotificationFluentContentBuilder& AddText(winrt::hstring text) { builder.AddText(text); return *this; }
-
-    winrt::hstring GetXml() { return builder.GetXml(); };
-
-private:
-    AppNotificationContentBuilder builder;
-};
-
 void BaseTestSuite::ClassSetup()
 {
     ::Test::Bootstrap::SetupPackages();
@@ -148,30 +135,12 @@ void BaseTestSuite::MultipleChannelClose()
 
 void BaseTestSuite::VerifyAppNotificationContentBuilder()
 {
-    auto builder{ AppNotificationContentBuilder() };
-    builder.AddText(L"Message1");
-    builder.AddText(L"Message2");
-
-    auto xmlPayload{ builder.GetXml() };
-
-    VERIFY_ARE_EQUAL(L"<toast>Message1;Message2</toast>", xmlPayload);
-}
-void BaseTestSuite::VerifyAppNotificationFluentContentBuilder()
-{
-    auto xmlPayload{ AppNotificationContentBuilder()
-        .AddTextFluent(L"Message1")
-        .AddTextFluent(L"Message2")
-        .GetXml() };
-
-    VERIFY_ARE_EQUAL(L"<toast>Message1;Message2</toast>", xmlPayload);
-}
-
-void BaseTestSuite::VerifyAppNotificationFluentWrapperContentBuilder()
-{
-    auto xmlPayload{ AppNotificationFluentContentBuilder()
-        .AddText(L"Message1")
-        .AddText(L"Message2")
-        .GetXml() };
+    auto xmlPayload{ AppNotificationContent()
+        .AddText(Text(L"Message1"))
+        .AddText(Text(L"Message2"))
+        .AddButton(Button(L"text"))
+        .GetXml()
+    };
 
     VERIFY_ARE_EQUAL(L"<toast>Message1;Message2</toast>", xmlPayload);
 }
