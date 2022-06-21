@@ -135,14 +135,47 @@ void BaseTestSuite::MultipleChannelClose()
 
 void BaseTestSuite::VerifyAppNotificationContentBuilder()
 {
+#if 0
+    L"<toast launch = \"action=ToastClick&amp;" + ScenarioIdToken + L"\">\
+            <visual>\
+                <binding template = \"ToastGeneric\">\
+                    <image placement = \"appLogoOverride\" hint-crop=\"circle\" src = \"" + winrt::App::GetFullPathToAsset(L"Square150x150Logo.png") + L"\"/>\
+                    <text>" + ScenarioName + L"</text>\
+                    <text>This is an example message using XML</text>\
+                </binding>\
+            </visual>\
+            <actions>\
+                <action\
+                    content = \"Open App\"\
+                    arguments = \"action=OpenApp&amp;" + ScenarioIdToken + L"\"/>\
+            </actions>\
+        </toast>"
+#endif
+
+    winrt::hstring expected{
+        L"<toast>"\
+            L"<visual>"\
+                L"<binding template = \"ToastGeneric\">"\
+                    L"<text>Message1</text>"\
+                    L"<text>Message2</text>"\
+                L"</binding>"\
+            L"</visual>"\
+            L"<actions>"\
+                L"<action "\
+                    L"content = \"Open App\"/>"\
+                    //arguments = \"action=OpenApp&amp;" + ScenarioIdToken + L"\"/>
+            L"</actions>"\
+        L"</toast>"
+    };
+
     auto xmlPayload{ AppNotificationContent()
         .AddText(Text(L"Message1"))
         .AddText(Text(L"Message2"))
-        .AddButton(Button(L"text"))
+        .AddButton(Button(L"Open App"))
         .GetXml()
     };
 
-    VERIFY_ARE_EQUAL(L"<toast>Message1;Message2</toast>", xmlPayload);
+    VERIFY_ARE_EQUAL(expected, xmlPayload);
 }
 
 void BaseTestSuite::VerifyRegisterAndUnregister()

@@ -24,14 +24,19 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
 
     winrt::Microsoft::Windows::PushNotifications::AppNotificationContent AppNotificationContent::AddButton(Button button)
     {
-        //m_text (text);
+        m_button = button;
 
         return *this;
     }
 
     hstring AppNotificationContent::GetXml()
     {
-        std::wstring xmlPayload{ L"<toast>" };
+        std::wstring xmlPayload{ L"" };
+
+        xmlPayload.append(L"<toast>");
+
+        xmlPayload.append(L"<visual>");
+        xmlPayload.append(L"<binding template = \"ToastGeneric\">");
 
         if (m_lines > 0)
         {
@@ -40,13 +45,16 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
 
         if (m_lines > 1)
         {
-            xmlPayload.append(L";");
             xmlPayload.append(m_text2.GetXml());
         }
+
+        xmlPayload.append(L"</binding>");
+        xmlPayload.append(L"</visual>");
+
+        xmlPayload.append(m_button.GetXml());
 
         xmlPayload.append(L"</toast>");
 
         return hstring(xmlPayload);
-        //return L"<toast>Message1;Message2</toast>";
     }
 }

@@ -16,6 +16,7 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
         int m_lines{ 0 };
         Text m_text1{ L"default1" };
         Text m_text2{ L"default2" };
+        Button m_button{ L"Default Button"};
     };
 }
 namespace winrt::Microsoft::Windows::PushNotifications::factory_implementation
