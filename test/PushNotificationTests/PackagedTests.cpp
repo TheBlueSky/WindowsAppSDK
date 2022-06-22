@@ -19,9 +19,14 @@ void PackagedTests::MultipleChannelClose()
     BaseTestSuite::MultipleChannelClose();
 }
 
-void PackagedTests::VerifyAppNotificationContentBuilder()
+void PackagedTests::VerifyContentBuilderReturnsRefToSelf()
 {
-    BaseTestSuite::VerifyAppNotificationContentBuilder();
+    BaseTestSuite::VerifyContentBuilderReturnsRefToSelf();
+}
+
+void PackagedTests::VerifyContentBuilderReturnsProperXml()
+{
+    BaseTestSuite::VerifyContentBuilderReturnsProperXml();
 }
 
 void PackagedTests::VerifyRegisterAndUnregister()

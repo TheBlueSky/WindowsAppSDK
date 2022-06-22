@@ -23,7 +23,8 @@ class BaseTestSuite
         void ChannelRequestUsingNullRemoteId();
         void ChannelRequestUsingRemoteId();
         void MultipleChannelClose(); // Currently failing
-        void VerifyAppNotificationContentBuilder();
+        void VerifyContentBuilderReturnsRefToSelf();
+        void VerifyContentBuilderReturnsProperXml();
         void VerifyRegisterAndUnregister();
         void VerifyRegisterAndUnregisterAll();
         void VerifyUnregisterFails();

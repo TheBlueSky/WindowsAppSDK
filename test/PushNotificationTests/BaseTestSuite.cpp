@@ -133,7 +133,29 @@ void BaseTestSuite::MultipleChannelClose()
     VERIFY_THROWS_HR(result.Channel().Close(), WPN_E_CHANNEL_CLOSED);
 }
 
-void BaseTestSuite::VerifyAppNotificationContentBuilder()
+void BaseTestSuite::VerifyContentBuilderReturnsRefToSelf()
+{
+    auto b1{ Button(L"Button1") };
+
+    auto b2{ Button(L"Button2") };
+    auto b2a{ b2.AddArgument(L"action", L"Button2") };
+
+    b1.AddArgument(L"action", L"Button1");   // A change to b1 only affects b1.
+    b2a.AddArgument(L"action", L"Button2a"); // but a change to b2a will also affect b2 (as they point to the same object) 
+
+    VERIFY_ARE_EQUAL(L"<actions><action content = \"Button1\" arguments = \"action=Button1\"/></actions>", b1.GetXml());
+    VERIFY_ARE_EQUAL(L"<actions><action content = \"Button2\" arguments = \"action=Button2a\"/></actions>", b2.GetXml());
+    VERIFY_ARE_EQUAL(L"<actions><action content = \"Button2\" arguments = \"action=Button2a\"/></actions>", b2a.GetXml());
+
+    b1.AddArgument(L"action2", L"Button1");  // A change to b1 only affects b1.
+    b2.AddArgument(L"action2", L"Button2");  // but a change to b2 will also affect b2a (as they point to the same object) 
+
+    VERIFY_ARE_EQUAL(L"<actions><action content = \"Button1\" arguments = \"action2=Button1\"/></actions>", b1.GetXml());
+    VERIFY_ARE_EQUAL(L"<actions><action content = \"Button2\" arguments = \"action2=Button2\"/></actions>", b2.GetXml());
+    VERIFY_ARE_EQUAL(L"<actions><action content = \"Button2\" arguments = \"action2=Button2\"/></actions>", b2a.GetXml());
+}
+
+void BaseTestSuite::VerifyContentBuilderReturnsProperXml()
 {
     winrt::hstring expected{
         L"<toast launch = \"action=ToastClick\">"\

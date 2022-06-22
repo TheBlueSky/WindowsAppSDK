@@ -49,7 +49,8 @@ class PackagedTests : BaseTestSuite
     BEGIN_TEST_METHOD(MultipleChannelClose) // Currently failing 
         TEST_METHOD_PROPERTY(L"Ignore", L"true")
     END_TEST_METHOD()
-    TEST_METHOD(VerifyAppNotificationContentBuilder);
+    TEST_METHOD(VerifyContentBuilderReturnsRefToSelf);
+    TEST_METHOD(VerifyContentBuilderReturnsProperXml);
     TEST_METHOD(VerifyRegisterAndUnregister);
     TEST_METHOD(VerifyRegisterAndUnregisterAll);
     TEST_METHOD(VerifyUnregisterFails);
