@@ -49,6 +49,7 @@ class UnpackagedTests : BaseTestSuite
     END_TEST_METHOD()
     TEST_METHOD(VerifyContentBuilderReturnsRefToSelf);
     TEST_METHOD(VerifyContentBuilderReturnsProperXml);
+    TEST_METHOD(ComparePerfBetweenFluentAndNonFluentBuilder);
     TEST_METHOD(VerifyRegisterAndUnregister);
     TEST_METHOD(VerifyRegisterAndUnregisterAll);
     TEST_METHOD(VerifyUnregisterFails);

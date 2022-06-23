@@ -192,6 +192,73 @@ void BaseTestSuite::VerifyContentBuilderReturnsProperXml()
     VERIFY_ARE_EQUAL(expected, xmlPayload);
 }
 
+void BaseTestSuite::ComparePerfBetweenFluentAndNonFluentBuilder()
+{
+    winrt::hstring expected{
+        L"<toast launch = \"action=ToastClick\">"\
+            L"<visual>"\
+                L"<binding template = \"ToastGeneric\">"\
+                    L"<image "\
+                        L"placement = \"appLogoOverride\" "\
+                        L"hint - crop = \"circle\" "\
+                        L"src = \"Path\\to\\Square150x150Logo.png\"/>"\
+                    L"<text>Message1</text>"\
+                    L"<text>Message2</text>"\
+                L"</binding>"\
+            L"</visual>"\
+            L"<actions>"\
+                L"<action "\
+                    L"content = \"Open App\" "\
+                    L"arguments = \"action=OpenApp\"/>"\
+            L"</actions>"\
+        L"</toast>"
+    };
+
+    LARGE_INTEGER start;
+    LARGE_INTEGER end;
+    QueryPerformanceCounter(&start);
+
+    auto xmlPayload1{ AppNotificationContent()
+        .AddArgument(L"action", L"ToastClick")
+        .AddImage(Image(L"Path\\to\\Square150x150Logo.png")
+            .SetUsesCircleCrop(true)
+            .SetImagePlacement(ImagePlacement::AppLogoOverride))
+        .AddText(Text(L"Message1"))
+        .AddText(Text(L"Message2"))
+        .AddButton(Button(L"Open App")
+            .AddArgument(L"action", L"OpenApp"))
+        .GetXml()
+    };
+    QueryPerformanceCounter(&end);
+    auto diff{ end.QuadPart - start.QuadPart };
+
+    LARGE_INTEGER nfstart;
+    LARGE_INTEGER nfend;
+    QueryPerformanceCounter(&nfstart);
+
+    auto nfi{ NFImage(L"Path\\to\\Square150x150Logo.png") };
+    nfi.SetUsesCircleCrop(true);
+    nfi.SetImagePlacement(ImagePlacement::AppLogoOverride);
+
+    auto nfb{ NFButton(L"Open App") };
+    nfb.AddArgument(L"action", L"OpenApp");
+
+    auto nfc{ NFAppNotificationContent() };
+    nfc.AddArgument(L"action", L"ToastClick");
+    nfc.AddImage(nfi);
+    nfc.AddText(NFText(L"Message1"));
+    nfc.AddText(NFText(L"Message2"));
+    nfc.AddButton(nfb);
+
+    auto xmlPayload2{ nfc.GetXml() };
+
+    QueryPerformanceCounter(&nfend);
+    auto nfdiff{ nfend.QuadPart - nfstart.QuadPart };
+
+    VERIFY_ARE_EQUAL(expected, xmlPayload1);
+    VERIFY_ARE_EQUAL(expected, xmlPayload2);
+}
+
 void BaseTestSuite::VerifyRegisterAndUnregister()
 {
     RegisterWithPushNotificationManager();

@@ -25,6 +25,7 @@ class BaseTestSuite
         void MultipleChannelClose(); // Currently failing
         void VerifyContentBuilderReturnsRefToSelf();
         void VerifyContentBuilderReturnsProperXml();
+        void ComparePerfBetweenFluentAndNonFluentBuilder();
         void VerifyRegisterAndUnregister();
         void VerifyRegisterAndUnregisterAll();
         void VerifyUnregisterFails();

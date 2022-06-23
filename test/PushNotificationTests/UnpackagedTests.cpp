@@ -29,6 +29,11 @@ void UnpackagedTests::VerifyContentBuilderReturnsProperXml()
     BaseTestSuite::VerifyContentBuilderReturnsProperXml();
 }
 
+void UnpackagedTests::ComparePerfBetweenFluentAndNonFluentBuilder()
+{
+    UnpackagedTests::ComparePerfBetweenFluentAndNonFluentBuilder();
+}
+
 void UnpackagedTests::VerifyRegisterAndUnregister()
 {
     BaseTestSuite::VerifyRegisterAndUnregister();
