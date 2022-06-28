@@ -5,17 +5,14 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
 {
     struct Button : ButtonT<Button>
     {
-        Button(hstring content);
-
-        winrt::Microsoft::Windows::PushNotifications::Button AddArgument(hstring key, hstring value);
+        Button(hstring content, ArgumentSerializer arguments);
 
         // Retrieves the XML content of the Text.
         hstring GetXml();
 
     private:
         std::wstring m_content{};
-        std::wstring m_key{};
-        std::wstring m_value{};
+        ArgumentSerializer m_arguments{};
     };
 }
 

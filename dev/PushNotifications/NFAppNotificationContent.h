@@ -6,8 +6,7 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
     struct NFAppNotificationContent : NFAppNotificationContentT<NFAppNotificationContent>
     {
         NFAppNotificationContent() = default;
-
-        void AddArgument(hstring key, hstring value);
+        NFAppNotificationContent(NFArgumentSerializer arguments);
 
         void AddButton(NFButton button);
         void AddImage(NFImage image);
@@ -19,10 +18,9 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
         int m_lines{ 0 };
         NFText m_text1{ L"default1" };
         NFText m_text2{ L"default2" };
-        NFButton m_button{ L"Default Button" };
-        NFImage m_image{ L"DefaultImage" };
-        std::wstring m_key{};
-        std::wstring m_value{};
+        NFButton m_button{ L"Default Button", NFArgumentSerializer() };
+        NFImage m_image{ winrt::Windows::Foundation::Uri(L"file://Path/to/Square150x150Logo.png") };
+        NFArgumentSerializer m_arguments{};
     };
 }
 namespace winrt::Microsoft::Windows::PushNotifications::factory_implementation

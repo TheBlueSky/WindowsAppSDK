@@ -18,9 +18,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)AppNotificationContent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ArgumentSerializer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Button.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Image.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NFAppNotificationContent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)NFArgumentSerializer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NFButton.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NFImage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NFText.cpp" />
@@ -32,10 +34,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)AppNotificationContent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ArgumentSerializer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Button.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)externs.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Image.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NFAppNotificationContent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NFArgumentSerializer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NFButton.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NFImage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NFText.h" />

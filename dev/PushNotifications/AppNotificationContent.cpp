@@ -4,12 +4,9 @@
 
 namespace winrt::Microsoft::Windows::PushNotifications::implementation
 {
-    winrt::Microsoft::Windows::PushNotifications::AppNotificationContent AppNotificationContent::AddArgument(hstring key, hstring value)
+    AppNotificationContent::AppNotificationContent(ArgumentSerializer arguments)
     {
-        m_key = key;
-        m_value = value;
-
-        return *this;
+        m_arguments = arguments;
     }
 
     winrt::Microsoft::Windows::PushNotifications::AppNotificationContent AppNotificationContent::AddButton(Button button)
@@ -46,7 +43,7 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
     {
         std::wstring xmlPayload{ L"" };
 
-        xmlPayload.append(L"<toast launch = \"" + m_key + L"=" + m_value +L"\">");
+        xmlPayload.append(L"<toast launch = \"" + m_arguments.Serialize() + L"\">");
 
         xmlPayload.append(L"<visual>");
         xmlPayload.append(L"<binding template = \"ToastGeneric\">");

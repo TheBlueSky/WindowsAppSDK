@@ -5,17 +5,11 @@
 namespace winrt::Microsoft::Windows::PushNotifications::implementation
 {
 
-    NFButton::NFButton(hstring content)
+    NFButton::NFButton(hstring content, NFArgumentSerializer arguments)
     {
         m_content = content;
+        m_arguments = arguments;
     }
-
-    void NFButton::AddArgument(hstring key, hstring value)
-    {
-        m_key = key;
-        m_value = value;
-    }
-
 
     hstring NFButton::GetXml()
     {
@@ -24,7 +18,7 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
         xmlPayload.append(L"<actions>");
         xmlPayload.append(L"<action ");
         xmlPayload.append(L"content = \"" + m_content + L"\" ");
-        xmlPayload.append(L"arguments = \"" + m_key + L"=" + m_value + L"\"/>");
+        xmlPayload.append(L"arguments = \"" + m_arguments.Serialize() + L"\"/>");
         xmlPayload.append(L"</actions>");
 
         return hstring(xmlPayload);

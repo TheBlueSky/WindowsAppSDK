@@ -5,10 +5,10 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
 {
     struct Image : ImageT<Image>
     {
-        Image(hstring imageSrc);
+        Image(winrt::Windows::Foundation::Uri imageUri);
 
         // An enum to describe how the image will be cropped.
-        winrt::Microsoft::Windows::PushNotifications::Image SetUsesCircleCrop(bool usesCircleCrop);
+        winrt::Microsoft::Windows::PushNotifications::Image UsesCircleCrop();
 
         // Override the app logo with custom image of choice that will be displayed on the AppNotification, otherwise it will be an inline image.
         winrt::Microsoft::Windows::PushNotifications::Image SetImagePlacement(ImagePlacement placement);
@@ -17,7 +17,7 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
         hstring GetXml();
 
     private:
-        std::wstring m_imageSrc{};
+        winrt::Windows::Foundation::Uri m_imageUri{ L"file://default.png" };
         bool m_usesCircleCrop{};
         ImagePlacement m_placement{};
     };

@@ -6,8 +6,7 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
     struct AppNotificationContent : AppNotificationContentT<AppNotificationContent>
     {
         AppNotificationContent() = default;
-
-        winrt::Microsoft::Windows::PushNotifications::AppNotificationContent AddArgument(hstring key, hstring value);
+        AppNotificationContent(ArgumentSerializer arguments);
 
         winrt::Microsoft::Windows::PushNotifications::AppNotificationContent AddButton(Button button);
         winrt::Microsoft::Windows::PushNotifications::AppNotificationContent AddImage(Image image);
@@ -19,10 +18,9 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
         int m_lines{ 0 };
         Text m_text1{ L"default1" };
         Text m_text2{ L"default2" };
-        Button m_button{ L"Default Button" };
-        Image m_image{ L"DefaultImage" };
-        std::wstring m_key{};
-        std::wstring m_value{};
+        Button m_button{ L"Default Button", ArgumentSerializer() };
+        Image m_image{ winrt::Windows::Foundation::Uri(L"file://Path/to/Square150x150Logo.png") };
+        ArgumentSerializer m_arguments{};
     };
 }
 namespace winrt::Microsoft::Windows::PushNotifications::factory_implementation

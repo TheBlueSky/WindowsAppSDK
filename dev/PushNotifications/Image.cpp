@@ -5,14 +5,14 @@
 namespace winrt::Microsoft::Windows::PushNotifications::implementation
 {
 
-    Image::Image(hstring imageSrc)
+    Image::Image(winrt::Windows::Foundation::Uri imageUri)
     {
-        m_imageSrc = imageSrc;
+        m_imageUri = imageUri;
     }
 
-    winrt::Microsoft::Windows::PushNotifications::Image Image::SetUsesCircleCrop(bool usesCircleCrop)
+    winrt::Microsoft::Windows::PushNotifications::Image Image::UsesCircleCrop()
     {
-        m_usesCircleCrop = usesCircleCrop;
+        m_usesCircleCrop = true;
 
         return *this;
     }
@@ -54,7 +54,7 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
 
         }
 
-        xmlPayload.append(L"src = \"" + m_imageSrc + L"\"/>");
+        xmlPayload.append(L"src = \"" + m_imageUri.ToString() + L"\"/>");
 
         return hstring(xmlPayload);
     }

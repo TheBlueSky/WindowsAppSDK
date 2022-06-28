@@ -5,17 +5,14 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
 {
     struct NFButton : NFButtonT<NFButton>
     {
-        NFButton(hstring content);
-
-        void AddArgument(hstring key, hstring value);
+        NFButton(hstring content, NFArgumentSerializer arguments);
 
         // Retrieves the XML content of the Text.
         hstring GetXml();
 
     private:
         std::wstring m_content{};
-        std::wstring m_key{};
-        std::wstring m_value{};
+        NFArgumentSerializer m_arguments{};
     };
 }
 

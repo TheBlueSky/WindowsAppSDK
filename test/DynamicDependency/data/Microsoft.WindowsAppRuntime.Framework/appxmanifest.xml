@@ -71,6 +71,7 @@
             <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.PushNotificationRegistrationToken" ThreadingModel="both" />
             <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.PushNotificationManager" ThreadingModel="both" />
             <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.AppNotificationContent" ThreadingModel="both" />
+            <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.ArgumentSerializer" ThreadingModel="both" />
             <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.Button" ThreadingModel="both" />
             <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.Image" ThreadingModel="both" />
             <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.Text" ThreadingModel="both" />
@@ -78,6 +79,7 @@
             <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.NFButton" ThreadingModel="both" />
             <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.NFImage" ThreadingModel="both" />
             <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.NFText" ThreadingModel="both" />
+            <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.NFArgumentSerializer" ThreadingModel="both" />
         </InProcessServer>
     </Extension>
     <Extension Category="windows.activatableClass.inProcessServer">
