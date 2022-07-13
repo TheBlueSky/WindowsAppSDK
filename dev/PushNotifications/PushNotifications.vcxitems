@@ -19,6 +19,9 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)AppNotificationContent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)AppNotificationButton.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)NFAppNotificationButton.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)NFAppNotificationContent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)NFAppNotificationTextProperties.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PushNotificationChannel.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PushNotificationCreateChannelResult.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PushNotificationManager.cpp" />
@@ -29,6 +32,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)AppNotificationContent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)AppNotificationButton.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)externs.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NFAppNotificationButton.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NFAppNotificationContent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NFAppNotificationTextProperties.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PushBackgroundTaskInstance.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PushNotificationChannel.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PushNotificationCreateChannelResult.h" />

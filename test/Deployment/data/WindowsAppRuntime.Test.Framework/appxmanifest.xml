@@ -73,6 +73,9 @@
             <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.AppNotificationContent" ThreadingModel="both" />
             <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.AppNotificationButton" ThreadingModel="both" />
             <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.AppNotificationTextProperties" ThreadingModel="both" />
+            <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.NFAppNotificationContent" ThreadingModel="both" />
+            <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.NFAppNotificationButton" ThreadingModel="both" />
+            <ActivatableClass ActivatableClassId="Microsoft.Windows.PushNotifications.NFAppNotificationTextProperties" ThreadingModel="both" />
         </InProcessServer>
     </Extension>
     <Extension Category="windows.activatableClass.inProcessServer">

@@ -194,7 +194,6 @@ void BaseTestSuite::VerifyContentBuilderReturnsProperXml()
 
 void BaseTestSuite::ComparePerfBetweenFluentAndNonFluentBuilder()
 {
-#if 0
     winrt::hstring expected{
         L"<toast launch = \"action=ToastClick\">"\
             L"<visual>"\
@@ -215,54 +214,85 @@ void BaseTestSuite::ComparePerfBetweenFluentAndNonFluentBuilder()
         L"</toast>"
     };
 
-    LARGE_INTEGER start;
-    LARGE_INTEGER end;
-    QueryPerformanceCounter(&start);
-
-    auto xmlPayload1{ AppNotificationContent(ArgumentSerializer()
-        .AddArgument(L"action", L"ToastClick"))
-        .AddImage(Image(winrt::Windows::Foundation::Uri(L"file://path/to/Square150x150Logo.png"))
-            .UsesCircleCrop()
-            .SetImagePlacement(ImagePlacement::AppLogoOverride))
-        .AddText(Text(L"Message1"))
-        .AddText(Text(L"Message2"))
-        .AddButton(Button(L"Open App", ArgumentSerializer()
-            .AddArgument(L"action", L"OpenApp")))
+    auto xmlPayload1{ AppNotificationContent()
+        .AddArgument(L"action", L"ToastClick")
+        .SetAppLogoOverrideImage(winrt::Windows::Foundation::Uri(L"file://Path/to/Square150x150Logo.png"), true)
+        .AddText(L"Message1")
+        .AddText(L"Message2")
+        .AddButton(AppNotificationButton(L"Open App")
+            .AddArgument(L"action", L"OpenApp"))
         .GetXml()
     };
-    QueryPerformanceCounter(&end);
-    auto diff{ end.QuadPart - start.QuadPart };
 
-    LARGE_INTEGER nfstart;
-    LARGE_INTEGER nfend;
-    QueryPerformanceCounter(&nfstart);
+    auto nfb0{ NFAppNotificationButton(L"Open App") };
+    nfb0.AddArgument(L"action", L"OpenApp");
 
-    auto nfi{ NFImage(winrt::Windows::Foundation::Uri(L"file://path/to/Square150x150Logo.png")) };
-    nfi.UsesCircleCrop();
-    nfi.SetImagePlacement(ImagePlacement::AppLogoOverride);
+    auto nfc0{ NFAppNotificationContent() };
+    nfc0.AddArgument(L"action", L"ToastClick");
+    nfc0.SetAppLogoOverrideImage(winrt::Windows::Foundation::Uri(L"file://Path/to/Square150x150Logo.png"), true);
+    nfc0.AddText(L"Message1");
+    nfc0.AddText(L"Message2");
+    nfc0.AddButton(nfb0);
 
-    auto nfa{ NFArgumentSerializer() };
-    nfa.AddArgument(L"action", L"OpenApp");
-
-    auto nfb{ NFButton(L"Open App", nfa) };
-
-    auto nfl{ NFArgumentSerializer() };
-    nfl.AddArgument(L"action", L"ToastClick");
-
-    auto nfc{ NFAppNotificationContent(nfl) };
-    nfc.AddImage(nfi);
-    nfc.AddText(NFText(L"Message1"));
-    nfc.AddText(NFText(L"Message2"));
-    nfc.AddButton(nfb);
-
-    auto xmlPayload2{ nfc.GetXml() };
-
-    QueryPerformanceCounter(&nfend);
-    auto nfdiff{ nfend.QuadPart - nfstart.QuadPart };
+    auto xmlPayload2{ nfc0.GetXml() };
 
     VERIFY_ARE_EQUAL(expected, xmlPayload1);
     VERIFY_ARE_EQUAL(expected, xmlPayload2);
-#endif
+
+    LONGLONG sum{ 0 };
+    LONGLONG nfsum{ 0 };
+
+    LARGE_INTEGER frequency;
+    QueryPerformanceFrequency(&frequency);
+    double toMilliseconds{ 1000.0 / (double)frequency.QuadPart };
+
+    for (auto i = 0; i < 1; i++)
+    {
+        LARGE_INTEGER start;
+        LARGE_INTEGER end;
+        QueryPerformanceCounter(&start);
+
+        auto xmlPayload3{ AppNotificationContent()
+            .AddArgument(L"action", L"ToastClick")
+            .SetAppLogoOverrideImage(winrt::Windows::Foundation::Uri(L"file://Path/to/Square150x150Logo.png"), true)
+            .AddText(L"Message1")
+            .AddText(L"Message2")
+            .AddButton(AppNotificationButton(L"Open App")
+                .AddArgument(L"action", L"OpenApp"))
+            .GetXml()
+        };
+
+        QueryPerformanceCounter(&end);
+        auto diff{ end.QuadPart - start.QuadPart };
+
+        LARGE_INTEGER nfstart;
+        LARGE_INTEGER nfend;
+        QueryPerformanceCounter(&nfstart);
+
+        auto nfb{ NFAppNotificationButton(L"Open App") };
+        nfb.AddArgument(L"action", L"OpenApp");
+
+        auto nfc{ NFAppNotificationContent() };
+        nfc.AddArgument(L"action", L"ToastClick");
+        nfc.SetAppLogoOverrideImage(winrt::Windows::Foundation::Uri(L"file://Path/to/Square150x150Logo.png"), true);
+        nfc.AddText(L"Message1");
+        nfc.AddText(L"Message2");
+        nfc.AddButton(nfb);
+
+        auto xmlPayload4{ nfc.GetXml() };
+
+        QueryPerformanceCounter(&nfend);
+        auto nfdiff{ nfend.QuadPart - nfstart.QuadPart };
+
+        VERIFY_ARE_EQUAL(expected, xmlPayload3);
+        VERIFY_ARE_EQUAL(expected, xmlPayload4);
+
+        sum += diff;
+        nfsum += nfdiff;
+    }
+
+    //VERIFY_ARE_EQUAL(nfsum, sum);
+    VERIFY_ARE_EQUAL((double)nfsum * toMilliseconds, (double)sum * toMilliseconds);
 }
 
 void BaseTestSuite::VerifyRegisterAndUnregister()

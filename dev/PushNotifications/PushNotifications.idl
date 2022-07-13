@@ -258,4 +258,111 @@ namespace Microsoft.Windows.PushNotifications
         // AppNotification constructor.
         String GetXml();
     };
+
+    runtimeclass NFAppNotificationTextProperties
+    {
+        // Contains the set of <text> attributes
+        NFAppNotificationTextProperties();
+
+        void SetLanguage(String language);
+
+        void UsesCallScenarioAlign();
+
+        void SetMaxLines(Int32 maxLines);
+    }
+
+    runtimeclass NFAppNotificationButton
+    {
+        // Button can use ToolTip instead of content which requires empty content.
+        // Argument attribute is required and uses the ArgumentSerializer construct
+        // to add arguments to the button.
+        NFAppNotificationButton();
+        NFAppNotificationButton(String content);
+
+        void AddArgument(String key, String value);
+
+        // Sets the IconUri for the button.
+        //Button SetIconUri(Windows.Foundation.Uri iconUri);
+
+        // The tooltip for a button, if the button has an empty content string.
+        //Button SetToolTip(String toolTip);
+
+        // Sets the Button as context menu action.
+        //Button UseContextMenuPlacement();
+
+        // Sets the ButtonStyle to Success or Critical
+        //Button SetButtonStyle(ButtonStyle buttonStyle);
+
+        // Sets the ID of an existing TextBox in order to have this button display to the right of the input.
+        //Button SetInputId(String inputId);
+
+        // Launches the URI passed into the button when activated.
+        //Button SetProtocolActivation(Windows.Foundation.Uri protocolUri);
+        //Button SetProtocolActivation(Windows.Foundation.Uri protocolUri, String targetApplicationPfn);
+
+        // Retrieves the XML content of the button.
+        String GetXml();
+    };
+
+    runtimeclass NFAppNotificationContent
+    {
+        NFAppNotificationContent();
+
+        // Adds arguments to the launch attribute to return when AppNotification is clicked.
+        void AddArgument(String key, String value);
+
+        // Sets the timeStamp of the AppNotification to when it was constructed instead of when it was sent.
+        //AppNotificationContent SetTimeStamp(Windows.Foundation.DateTime timeStamp);
+
+        // Sets the scenario of the AppNotification.
+        //AppNotificationContent SetScenarioType(ScenarioType scenarioType);
+
+        // Adds text to the AppNotification.
+        void AddText(String text);
+        void AddText(String text, NFAppNotificationTextProperties properties);
+        void SetAttributionText(String text);
+        void SetAttributionText(String text, String language);
+
+        // Sets the full-width inline-image that appears when you expand the AppNotification
+        void SetInlineImage(Windows.Foundation.Uri imageUri);
+        [default_overload]
+        void SetInlineImage(Windows.Foundation.Uri imageUri, String alternateText);
+        void SetInlineImage(Windows.Foundation.Uri imageUri, Boolean useCircleCrop);
+        void SetInlineImage(Windows.Foundation.Uri imageUri, String alternateText, Boolean useCircleCrop);
+
+        // Sets the image that is left-aligned with notification text
+        void SetAppLogoOverrideImage(Windows.Foundation.Uri imageUri);
+        [default_overload]
+        void SetAppLogoOverrideImage(Windows.Foundation.Uri imageUri, String alternateText);
+        void SetAppLogoOverrideImage(Windows.Foundation.Uri imageUri, Boolean useCircleCrop);
+        void SetAppLogoOverrideImage(Windows.Foundation.Uri imageUri, String alternateText, Boolean useCircleCrop);
+
+        // Sets the image that displays within the banner of the AppNotification.
+        void SetHeroImage(Windows.Foundation.Uri imageUri);
+        void SetHeroImage(Windows.Foundation.Uri imageUri, String alternateText);
+
+        // SetAudio
+        //[default_overload]
+        //AppNotificationContent SetAudio(Windows.Foundation.Uri audioUri);
+        //AppNotificationContent SetAudio(MSWinSoundEvent msWinSoundEvent);
+        //[default_overload]
+        //AppNotificationContent SetAudio(Windows.Foundation.Uri audioUri, Duration duration);
+        //AppNotificationContent SetAudio(MSWinSoundEvent msWinSoundEvent, Duration duration);
+        //AppNotificationContent MuteAudio();
+
+        // Add an input textbox to retrieve user input.
+        void AddTextBox(String id);
+        void AddTextBox(String id, String placeHolderText, String title);
+
+        // Adds a button to the AppNotificationContent
+        void AddButton(NFAppNotificationButton button);
+
+        // Add an input ComboBox to retrieve user input.
+        //AppNotificationContent AddComboBox(ComboBox comboBox);
+        //AppNotificationContent SetProgressBar(ProgressBar progressBar);
+
+        // Retrieves the notification XML content so that it can be used with a local
+        // AppNotification constructor.
+        String GetXml();
+    };
 }
