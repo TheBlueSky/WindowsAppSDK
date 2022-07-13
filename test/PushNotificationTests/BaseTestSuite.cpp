@@ -246,7 +246,7 @@ void BaseTestSuite::ComparePerfBetweenFluentAndNonFluentBuilder()
     QueryPerformanceFrequency(&frequency);
     double toMilliseconds{ 1000.0 / (double)frequency.QuadPart };
 
-    for (auto i = 0; i < 1; i++)
+    for (auto i = 0; i < 500; i++)
     {
         LARGE_INTEGER start;
         LARGE_INTEGER end;
